@@ -27,8 +27,6 @@ export const validateRegister = [
     .custom(async (value) => {
       const result = await searchEmail(value);
       if (result) {
-        console.log(result);
-
         throw new Error("Email is already in use");
       }
     }),
@@ -64,9 +62,10 @@ export const validateLogin = [
     .isEmail()
     .withMessage("Invalid email format")
     .custom(async (value) => {
-      const result = searchEmail(value);
+      const result = await searchEmail(value);
+
       if (!result) {
-        throw new Error( "User not found");
+        throw new Error("Email not found");
       }
     }),
   body("password")
@@ -81,7 +80,6 @@ export const validateLogin = [
 
 export const validateErrors = (req, res) => {
   const errors = validationResult(req);
-  console.log(errors);
 
   if (!errors.isEmpty()) {
     const validations = errors.array().map((value) => {

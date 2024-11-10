@@ -14,15 +14,13 @@ export const register = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const result = await addUser({
+    await addUser({
       res,
       username,
       email,
       hashedPassword,
       fullname,
     });
-
-    console.log(result);
 
     responses.created(res, "User registered successfully", {});
   } catch (err) {
@@ -38,7 +36,6 @@ export const login = async (req, res) => {
   if (validateErrors(req, res)) return;
 
   const result = await getIdByEmail({ res, email });
-  console.log(result);
 
   const token = jwt.sign({ id: result }, secretKey);
 

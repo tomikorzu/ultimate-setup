@@ -2,4 +2,6 @@
 node_modules
 *.db
 ./src/databases/*.db
+./src/databases/*.db-val
+./src/databases/*.db-shm
 *.log

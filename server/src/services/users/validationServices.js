@@ -9,8 +9,6 @@ export const getPassword = (props) => {
       if (err) {
         reject({ message: "There was an error server", code: 500 });
       } else if (!row) {
-        console.log(id);
-
         reject({ message: "User not found", code: 404 });
       } else {
         bcrypt.compare(oldPassword, row.password, (err, result) => {

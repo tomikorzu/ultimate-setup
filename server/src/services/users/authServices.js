@@ -28,6 +28,7 @@ export const getIdByEmail = (props) => {
     db.get(`SELECT id FROM users WHERE email = ?`, [email], (err, row) => {
       if (err) {
         responses.serverError(res);
+
         reject(false);
       } else if (!row) {
         responses.notFound(res, "User not found");
