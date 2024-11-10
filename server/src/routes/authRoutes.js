@@ -20,7 +20,7 @@ const router = express.Router();
 router.post("/register", validateRegister, register);
 router.post("/login", validateLogin, login);
 router.patch(
-  "/change-password",
+  "/change-password/:id",
   verifyUserLogged,
   userPayload,
   validateChangePassword,

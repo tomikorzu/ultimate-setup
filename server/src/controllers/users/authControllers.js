@@ -6,29 +6,30 @@ import responses from "../../utils/responses.js";
 
 import { addUser, getIdByEmail } from "../../services/users/authServices.js";
 
+const secretKey = process.env.SECRET_KEY;
+
 export const register = async (req, res) => {
   const { username, email, password, fullname } = req.body;
 
-  try {
-    if (validateErrors(req, res)) return;
+  if (validateErrors(req, res)) return;
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+  const hashedPassword = await bcrypt.hash(password, 10);
 
-    await addUser({
-      res,
-      username,
-      email,
-      hashedPassword,
-      fullname,
-    });
+  await addUser({
+    res,
+    username,
+    email,
+    hashedPassword,
+    fullname,
+  });
+  const result = await getIdByEmail({ res, email });
 
-    responses.created(res, "User registered successfully", {});
-  } catch (err) {
-    responses.serverError(res);
-  }
+  const token = jwt.sign({ email, id: result }, secretKey);
+
+  res.cookie("token", token, { httpOnly: true });
+
+  responses.created(res, "User registered successfully", { token });
 };
-
-const secretKey = process.env.SECRET_KEY;
 
 export const login = async (req, res) => {
   const { email } = req.body;
@@ -39,6 +40,6 @@ export const login = async (req, res) => {
 
   const token = jwt.sign({ id: result }, secretKey);
 
-  res.cookie("token", token);
-  responses.success(res, "Login successful");
+  res.cookie("token", token, { httpOnly: true });
+  responses.success(res, "Login successful", { token });
 };

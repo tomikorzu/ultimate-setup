@@ -6,10 +6,11 @@ export const changePassword = async (req, res) => {
   const { newPassword } = req.body;
 
   const id = req.params.id;
+  
 
   if (validateErrors(req, res)) return;
 
-  const result = await updatePassword(id, newPassword);
+  const result = await updatePassword({id, newPassword});
 
   if (result) {
     return responses.success(res, "Password changed successful", id);

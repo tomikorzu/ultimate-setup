@@ -3,34 +3,38 @@ import responses from "../../utils/responses.js";
 
 const secretKey = process.env.SECRET_KEY;
 
-export const verifyUserLogged = () => {
-  const token = req.headers.cookie;
+export const verifyUserLogged = (req, res, next) => {
+  const token = req.headers.authorization;
 
   if (!token) {
     return responses.badRequest(res, "You are not logged");
   }
 
-  const onlyToken = token.split("token=")[1];
-  console.log(onlyToken);
+  const onlyToken = token.split(" ")[1];
 
-  jwt.verify(onlyToken, secretKey);
-  next();
+  try {
+    jwt.verify(onlyToken, secretKey);
+    next();
+  } catch (err) {
+    return responses.unauthorized(res, "Invalid token");
+  }
 };
 
-export const userPayload = () => {
-  const authHeader = req.headers.cookie;
+export const userPayload = (req, res, next) => {
+  const authHeader = req.headers.authorization;
 
-  if (!authHeader)
-    return responses.badRequest(res, "The access token is required");
+  const token = authHeader.split(" ")[1];
 
-  jwt.verify(authHeader, secretKey, (err, decoded) => {
+  if (!token) return responses.badRequest(res, "The access token is required");
+
+  jwt.verify(token, secretKey, (err, decoded) => {
     if (err) return responses.unauthorized(res, "Invalid Token");
 
     req.user = {
-      id: decoded.id,
+      id: decoded,
     };
 
-    if (Object.values(decoded.id) != req.params.id) {
+    if (decoded.id.id != req.params.id) {
       return responses.forbidden(res, "User not authorized");
     }
 
