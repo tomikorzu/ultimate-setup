@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import { validateErrors } from "../../middlewares/validations/authValidations.js";
+import { validateErrors } from "../../middlewares/validations/users/authValidations.js";
 import responses from "../../utils/responses.js";
 
 import { addUser, getIdByEmail } from "../../services/users/authServices.js";

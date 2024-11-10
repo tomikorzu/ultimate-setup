@@ -12,8 +12,8 @@ import { verifyUserLogged, userPayload } from "../middlewares/tokens/tokens.js";
 import {
   validateRegister,
   validateLogin,
-} from "../middlewares/validations/authValidations.js";
-import { validateChangePassword } from "../middlewares/validations/userValidations.js";
+} from "../middlewares/validations/users/authValidations.js";
+import { validateChangePassword } from "../middlewares/validations/users/userValidations.js";
 
 const router = express.Router();
 

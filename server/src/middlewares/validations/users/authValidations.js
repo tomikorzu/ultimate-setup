@@ -4,7 +4,7 @@ import {
   searchEmail,
   searchPassword,
   searchUsername,
-} from "../../services/users/validationServices.js";
+} from "../../../services/users/validationServices.js";
 
 export const validateRegister = [
   body("username")

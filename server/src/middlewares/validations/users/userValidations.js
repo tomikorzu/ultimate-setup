@@ -1,6 +1,6 @@
 import { body } from "express-validator";
 
-import { getPassword } from "../../services/users/validationServices.js";
+import { getPassword } from "../../../services/users/validationServices.js";
 
 export const validateChangePassword = [
   body("oldPassword")

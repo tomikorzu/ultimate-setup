@@ -1,4 +1,4 @@
-import { validateErrors } from "../../middlewares/validations/authValidations.js";
+import { validateErrors } from "../../middlewares/validations/users/authValidations.js";
 import { updatePassword } from "../../services/users/authServices.js";
 import responses from "../../utils/responses.js";
 
