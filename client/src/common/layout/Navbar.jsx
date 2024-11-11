@@ -13,14 +13,14 @@ export default function Navbar({ items }) {
   return (
     <>
       <button
-        className={`toggle-btn ${isMenuActive ? "active" : ""}`}
+        className={`toggle-btn fade-in ${isMenuActive ? "active" : ""}`}
         onClick={toggleBtn}
       >
         <span className="line line1"></span>
         <span className="line line2"></span>
         <span className="line line3"></span>
       </button>
-      <nav className={`navbar ${isMenuActive ? "clip" : ""}`}>
+      <nav className={`navbar fade-in ${isMenuActive ? "clip" : ""}`}>
         <ul className={`navbar-menu ${isMenuActive ? "fade-in-menu" : ""}`}>
           {items.map((item, index) => (
             <li key={index} className="navbar-item">
