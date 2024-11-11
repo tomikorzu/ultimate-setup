@@ -85,18 +85,18 @@
     cursor: pointer;
   }
   .navbar-link {
-      opacity: 0.6;
+    opacity: 0.6;
     font-size: 1.75em;
   }
   .active-item {
-      opacity: 1;
-      pointer-events: none;
-    }
-    .button-container:hover .active-item {
-        transform: translate(0);
-    }
-    .button-container:hover > .navbar-link {
-      transform: translateX(25px);
-      opacity: 1;
-    }
+    opacity: 1;
+    pointer-events: none;
+  }
+  .button-container:hover > .navbar-link {
+    transform: translateX(25px);
+    opacity: 1;
+  }
+  .button-container:hover .active-item {
+    transform: translate(0);
+  }
 }
