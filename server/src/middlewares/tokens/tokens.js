@@ -4,16 +4,14 @@ import responses from "../../utils/responses.js";
 const secretKey = process.env.SECRET_KEY;
 
 export const verifyUserLogged = (req, res, next) => {
-  const token = req.headers.authorization;
+  const token = req.cookies.token;
 
   if (!token) {
     return responses.badRequest(res, "You are not logged");
   }
 
-  const onlyToken = token.split(" ")[1];
-
   try {
-    jwt.verify(onlyToken, secretKey);
+    jwt.verify(token, secretKey);
     next();
   } catch (err) {
     return responses.unauthorized(res, "Invalid token");
@@ -21,9 +19,7 @@ export const verifyUserLogged = (req, res, next) => {
 };
 
 export const userPayload = (req, res, next) => {
-  const authHeader = req.headers.authorization;
-
-  const token = authHeader.split(" ")[1];
+  const token = req.cookies.token;
 
   if (!token) return responses.badRequest(res, "The access token is required");
 
