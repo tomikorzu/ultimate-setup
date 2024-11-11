@@ -1,11 +1,11 @@
 import "./common/assets/styles/index.css";
 
-import RootRouter from "./common/routers/RootRouter";
+import AppProvider from "./common/providers/AppProvider";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RootRouter />
+    <AppProvider />
   </StrictMode>
 );

@@ -7,10 +7,10 @@ export default function MainLayout({ children }) {
         items={[
           { item: "Home", url: "/" },
           { item: "Dashboard", url: "/dashboard" },
+          { item: "Posts", url: "/posts" },
         ]}
       />
       <main className="fade-in">{children}</main>
-      <footer></footer>
     </>
   );
 }
