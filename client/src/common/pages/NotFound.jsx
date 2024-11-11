@@ -1,3 +1,5 @@
+import "../assets/styles/notfound.css";
+
 import { Link } from "react-router-dom";
 import Navbar from "../layout/Navbar";
 
