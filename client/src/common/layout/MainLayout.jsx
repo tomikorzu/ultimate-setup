@@ -8,6 +8,7 @@ export default function MainLayout({ children }) {
           { item: "Home", url: "/" },
           { item: "Dashboard", url: "/dashboard" },
           { item: "Posts", url: "/posts" },
+          { item: "Profile", url: "/profile" },
         ]}
       />
       <main className="fade-in">{children}</main>
