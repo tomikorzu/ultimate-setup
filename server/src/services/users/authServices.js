@@ -1,6 +1,6 @@
+import bcrypt from "bcrypt";
 import db from "../../config/users-db.js";
 import responses from "../../utils/responses.js";
-import bcrypt from "bcrypt";
 
 export const addUser = (props) => {
   const { res, username, email, hashedPassword, fullname } = props;
@@ -57,5 +57,23 @@ export const updatePassword = async (props) => {
         resolve(true);
       }
     );
+  });
+};
+
+export const getProfileData = async (res, id) => {
+  return new Promise((resolve, reject) => {
+    db.get(`SELECT * FROM users WHERE id = ?`, [id], (err, row) => {
+      if (err) {
+        responses.serverError(res);
+        return reject(false);
+      } else if (!row) {
+        console.log(id);
+
+        responses.notFound(res, "Content not found");
+        return resolve(false);
+      } else {
+        resolve(row);
+      }
+    });
   });
 };
